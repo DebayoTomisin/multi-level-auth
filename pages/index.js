@@ -1,9 +1,19 @@
+import { useEffect } from "react";
 import Head from "next/head";
+import { useRouter } from "next/router";
 import styles from "../styles/Home.module.css";
 import { useAppContext } from "../src/utils/context";
 
 export default function Home() {
-  console.log(useAppContext());
+  const router = useRouter();
+
+  const { state } = useAppContext();
+
+  useEffect(() => {
+    if (state?.isLogged == false) {
+      router.push("/login");
+    }
+  }, []);
 
   return (
     <div className={styles.container}>

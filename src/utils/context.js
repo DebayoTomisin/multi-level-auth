@@ -17,5 +17,5 @@ export const AppProvider = ({ children }) => {
 
   const values = { state, setState };
 
-  return <AppContext.Provider values={values}>{children}</AppContext.Provider>;
+  return <AppContext.Provider value={values}>{children}</AppContext.Provider>;
 };
