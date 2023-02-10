@@ -7,7 +7,7 @@ export const useAppContext = () => useContext(AppContext);
 const initialValue = {
   email: "",
   name: "",
-  authColor: [],
+  authColors: [],
   authStage: 0,
   isLogged: false,
 };
