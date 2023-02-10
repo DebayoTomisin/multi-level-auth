@@ -9,7 +9,7 @@ function InputField({ label, value, name, type, placeholder, onChange }) {
         name={name}
         type={type}
         placeholder={placeholder}
-        onChange={() => onChange()}
+        onChange={(e) => onChange(e.target.value)}
       />
     </div>
   );
