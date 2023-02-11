@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
+import { useRouter } from "next/router";
 import InputField from "../reusable/InputField";
 import ColorPicker from "./ColorPicker";
+import { successMessage, errorMessage } from "../reusable/Toast";
+import { registerApi } from "../../utils/api";
 
 const RegisterComponent = () => {
   const [colors, setColors] = useState([]);
@@ -10,16 +13,34 @@ const RegisterComponent = () => {
   const [activeBtn, setActiveBtn] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  console.log(username);
-  console.log(colors);
+  const router = useRouter();
 
-  const handleSubmit = () => {
-    console.log("registration succesful");
+  const handleSubmit = async (e) => {
+    setLoading(true);
+    e.preventDefault();
+    try {
+      const { status, message } = await registerApi(
+        email,
+        password,
+        username,
+        colors
+      );
+
+      if (status === 200) {
+        successMessage(message);
+        router.push('/login')
+      } else {
+        errorMessage(message);
+      }
+    } catch (error) {
+      errorMessage(error);
+    }
+    setLoading(false);
   };
 
   const activateButton = () => {
     if (
-      colors.length !== 3 &&
+      colors.length == 3 &&
       username.length !== 5 &&
       email !== "" &&
       password !== ""
