@@ -18,22 +18,28 @@ const RegisterComponent = () => {
   const handleSubmit = async (e) => {
     setLoading(true);
     e.preventDefault();
-    try {
-      const { status, message } = await registerApi(
-        email,
-        password,
-        username,
-        colors
-      );
+    let check = /(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})/;
+    if (password.match(check)) {
+      try {
+        const { status, message } = await registerApi(
+          email,
+          password,
+          username,
+          colors
+        );
 
-      if (status === 200) {
-        successMessage(message);
-        router.push('/login')
-      } else {
-        errorMessage(message);
+        if (status === 200) {
+          successMessage(message);
+          router.push("/login");
+        } else {
+          errorMessage(message);
+        }
+      } catch (error) {
+        errorMessage(error);
       }
-    } catch (error) {
-      errorMessage(error);
+    } else {
+      errorMessage("Password has to have n uppercase, lowercase and symbol");
+      setActiveBtn(false);
     }
     setLoading(false);
   };
@@ -41,7 +47,7 @@ const RegisterComponent = () => {
   const activateButton = () => {
     if (
       colors.length == 3 &&
-      username.length !== 5 &&
+      username.length > 5 &&
       email !== "" &&
       password !== ""
     ) {
