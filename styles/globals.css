@@ -41,6 +41,7 @@ a {
 
 .right-text {
   text-align: center;
+  width: 50%;
 }
 
 .inputGroup {
@@ -87,13 +88,13 @@ a {
 
 .button:disabled {
   cursor: not-allowed;
-  background: rgb(29, 28, 28);
+  background: rgb(141, 137, 137);
 }
 
 .button:disabled:hover {
   cursor: not-allowed;
   color: #fcf9f9;
-  background: rgb(29, 28, 28);
+  background: rgb(46, 45, 45);
 }
 
 .actionText {
@@ -111,6 +112,7 @@ a {
   text-align: center;
   padding: 0 10px;
 }
+
 @media screen and (max-width: 821px) {
   .authContainer {
     display: grid;
@@ -128,6 +130,18 @@ a {
 
 @media screen and (min-width: 812px) {
   .inputGroup {
-    width: 30vw;
+    width: 35vw;
   }
+
+  .right-text {
+    text-align: center;
+    width: 80%;
+  }
+}
+
+.colorPicker {
+  display: grid;
+  gap: 10px;
+  margin: 20px 0;
+  grid-template-columns: repeat(3, 1fr);
 }
